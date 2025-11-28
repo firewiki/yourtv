@@ -26,10 +26,10 @@ jobs:
         run: ./gradlew assembleRelease
 
       - name: List files in the outputs directory
-        run: tree -L 3 app
+        run: ls -R app/build/outputs/
 
       - name: Upload APK artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v3
         with:
-          name: YourTV-APK-Debug
-          path: app/build/outputs/apk/debug/app-debug.apk
+          name: YourTV-release
+          path: app/build/outputs/apk/release/app-release.apk
