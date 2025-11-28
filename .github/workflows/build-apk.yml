@@ -25,6 +25,9 @@ jobs:
       - name: Build with Gradle (Debug version)
         run: ./gradlew assembleDebug
 
+      - name: List files in the outputs directory
+        run: tree -L 3 app/build/outputs/
+
       - name: Upload APK artifact
         uses: actions/upload-artifact@v4
         with:
