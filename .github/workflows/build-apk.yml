@@ -22,8 +22,8 @@ jobs:
       - name: Grant execute permission to gradlew
         run: chmod +x gradlew
 
-      - name: Build with Gradle (Debug version)
-        run: ./gradlew assembleDebug
+      - name: Build with Gradle
+        run: ./gradlew assembleRelease
 
       - name: List files in the outputs directory
         run: tree -L 3 app
