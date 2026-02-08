@@ -2,8 +2,17 @@ name: Build YourTV APK
 
 on:
   workflow_dispatch:
+    # 允许手动输入要构建的 Ref (可以是 branch 或 tag)
+    inputs:
+      build_ref:
+        description: '输入要构建的分支或 Tag (例如: v2.0.3)'
+        required: true
+        default: 'main'
   push:
     branches: [ "main" ]
+    # 重点：增加对 tag 的监听，匹配 v 开头的版本号
+    tags:
+      - 'v*'
 
 jobs:
   build:
@@ -11,6 +20,10 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          # 使用指定的 ref，如果是手动触发则用输入值，如果是推送触发则用 github.ref
+          ref: ${{ github.event.inputs.build_ref || github.ref }}
+          fetch-depth: 0 # 完整获取提交记录，确保能找到所有 tag
 
       - name: Set up JDK 17
         uses: actions/setup-java@v4
@@ -23,6 +36,7 @@ jobs:
         run: chmod +x gradlew
 
       - name: Build with Gradle
+        # 使用 assembleRelease 构建项目
         run: ./gradlew assembleRelease
 
       - name: List files in the outputs directory
@@ -31,5 +45,7 @@ jobs:
       - name: Upload APK artifact
         uses: actions/upload-artifact@v4
         with:
-          name: YourTV-release
-          path: app/build/outputs/apk/release/yourtv_v1.8.5.apk
+          # 自动获取当前的 Tag 名或分支名作为产物名称
+          name: YourTV-Release-${{ github.ref_name }}
+          # 核心优化：使用通配符匹配 APK 路径，避免因为 v1.8.5 这种硬编码导致找不到 v2.0.3 的文件
+          path: app/build/outputs/apk/release/*.apk
