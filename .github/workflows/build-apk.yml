@@ -45,7 +45,7 @@ jobs:
       - name: Upload APK artifact
         uses: actions/upload-artifact@v4
         with:
-          # 自动获取当前的 Tag 名或分支名作为产物名称
-          name: YourTV-Release-${{ github.ref_name }}
+          # 修改点：优先使用手动输入的 build_ref，如果没有则用当前 ref
+          name: YourTV-Release-${{ github.event.inputs.build_ref || github.ref_name }}
           # 核心优化：使用通配符匹配 APK 路径，避免因为 v1.8.5 这种硬编码导致找不到 v2.0.3 的文件
           path: app/build/outputs/apk/release/*.apk
