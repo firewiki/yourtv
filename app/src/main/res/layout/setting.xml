@@ -253,6 +253,19 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:nextFocusUp="@+id/switch_display_seconds"
+                android:nextFocusDown="@+id/switch_disable_auto_update"
+                app:thumbTint="@color/switch_thumb_color"
+                app:trackTint="@color/switch_track_color" />
+
+            <androidx.appcompat.widget.SwitchCompat
+                android:id="@+id/switch_disable_auto_update"
+                android:text="@string/disable_auto_update"
+                android:textColor="@color/title_blur"
+                android:textSize="14sp"
+                android:layout_marginTop="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:nextFocusUp="@+id/switch_boot_startup"
                 android:nextFocusDown="@+id/switch_repeat_info"
                 app:thumbTint="@color/switch_thumb_color"
                 app:trackTint="@color/switch_track_color" />
@@ -266,7 +279,7 @@
                 android:layout_marginTop="5dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:nextFocusUp="@+id/switch_boot_startup"
+                android:nextFocusUp="@+id/switch_disable_auto_update"
                 android:nextFocusDown="@+id/switch_config_auto_load"
                 app:thumbTint="@color/switch_thumb_color"
                 app:trackTint="@color/switch_track_color" />

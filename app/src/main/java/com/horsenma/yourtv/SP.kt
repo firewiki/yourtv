@@ -42,6 +42,7 @@ object SP {
     private const val KEY_ENABLE_SCREEN_OFF_AUDIO = "enable_screen_off_audio"
     private const val KEY_ENABLE_WEBVIEW_TYPE = "enable_webview_type"
     private const val KEY_FULL_SCREEN_MODE = "full_screen_mode"
+    private const val KEY_DISABLE_AUTO_UPDATE = "disable_auto_update"
     private const val RESOLUTION_CACHE_PREFIX = "resolution_"
     private const val RESOLUTION_CACHE_TIMESTAMP_PREFIX = "resolution_timestamp_"
     private const val CACHE_DURATION = 24 * 60 * 60 * 1000L // 24 小时
@@ -51,6 +52,7 @@ object SP {
     internal var DEFAULT_FULL_SCREEN_MODE: Boolean = true
 
     const val DEFAULT_ENABLE_WEBVIEW_TYPE = false
+    const val DEFAULT_DISABLE_AUTO_UPDATE = false
     const val DEFAULT_ENABLE_SCREEN_OFF_AUDIO = true
     const val DEFAULT_SHOW_SOURCE_BUTTON = true
     const val DEFAULT_AUTO_SWITCH_SOURCE = false
@@ -242,6 +244,10 @@ object SP {
     var enableWebviewType: Boolean
         get() = sp.getBoolean(KEY_ENABLE_WEBVIEW_TYPE, DEFAULT_ENABLE_WEBVIEW_TYPE)
         set(value) = sp.edit() { putBoolean(KEY_ENABLE_WEBVIEW_TYPE, value) }
+
+    var disableAutoUpdate: Boolean
+        get() = sp.getBoolean(KEY_DISABLE_AUTO_UPDATE, DEFAULT_DISABLE_AUTO_UPDATE)
+        set(value) = sp.edit() { putBoolean(KEY_DISABLE_AUTO_UPDATE, value) }
 
     val fullScreenModeLiveData by lazy { MutableLiveData<Boolean>() }
 

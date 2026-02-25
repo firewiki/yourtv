@@ -18,3 +18,7 @@ files
 .kotlin/
 app/release/
 .README.md
+.claude
+.codex
+.gemini
+.qwen

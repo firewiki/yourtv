@@ -920,6 +920,11 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun scheduleAutoVersionCheck() {
+        if (SP.disableAutoUpdate) {
+            Log.d(TAG, "Auto version check disabled by user setting")
+            return
+        }
+
         // 检查是否需要自动检查（24小时内只检查一次）
         val lastCheckTime = sharedPrefs.getLong("last_auto_check_time", 0)
         val currentTime = System.currentTimeMillis()

@@ -7,6 +7,15 @@ android {
     namespace = "com.horsenma.yourtv"
     compileSdk = 35
 
+    signingConfigs {
+        create("release") {
+            storeFile = file("yourtv.keystore")
+            storePassword = "yourtv2025"
+            keyAlias = "yourtv"
+            keyPassword = "yourtv2025"
+        }
+    }
+
     defaultConfig {
         applicationId = "com.horsenma.yourtv"
         minSdk = 23
@@ -23,6 +32,7 @@ android {
     buildTypes {
         release {
             isMinifyEnabled = true
+            signingConfig = signingConfigs.getByName("release")
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
@@ -31,6 +41,7 @@ android {
         }
         debug {
             isMinifyEnabled = false
+            signingConfig = signingConfigs.getByName("release")
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"

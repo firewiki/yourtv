@@ -147,6 +147,13 @@ class SettingFragment : Fragment() {
             mainActivity.settingActive()
         }
 
+        val switchDisableAutoUpdate = _binding?.switchDisableAutoUpdate
+        switchDisableAutoUpdate?.isChecked = SP.disableAutoUpdate
+        switchDisableAutoUpdate?.setOnCheckedChangeListener { _, isChecked ->
+            SP.disableAutoUpdate = isChecked
+            mainActivity.settingActive()
+        }
+
         val switchRepeatInfo = _binding?.switchRepeatInfo
         switchRepeatInfo?.isChecked = SP.repeatInfo
         switchRepeatInfo?.setOnCheckedChangeListener { _, isChecked ->
@@ -432,6 +439,7 @@ class SettingFragment : Fragment() {
                     SP.channelReversal = SP.DEFAULT_CHANNEL_REVERSAL
                     SP.time = SP.DEFAULT_TIME
                     SP.bootStartup = SP.DEFAULT_BOOT_STARTUP
+                    SP.disableAutoUpdate = SP.DEFAULT_DISABLE_AUTO_UPDATE
                     SP.repeatInfo = SP.DEFAULT_REPEAT_INFO
                     SP.defaultLike = false
                     SP.showAllChannels = SP.DEFAULT_SHOW_ALL_CHANNELS
